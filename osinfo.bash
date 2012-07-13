@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Gather uname
+# Gather uname and make it lowercase
 PLATFORM=$(uname | tr '[:upper:]' '[:lower:]')
 
 # Detect platform
@@ -18,31 +18,31 @@ case $PLATFORM in
     # Gather release info
     if [[ -n `command -v lsb_release` ]]; then
       # dump release info and drop version
-      RELEASE=`lsb_release -ds 2>/dev/null | sed 's:^\(.*\) .*:\L\1:'`
+      DISTRO=`lsb_release -ds 2>/dev/null | sed 's:^\(.*\) .*:\L\1:'`
     else
       # grab first entry and remove extraneous path and filename affixes
-      RELEASE=`echo /etc/*release | head -1 | sed 's:/etc/\(.*\)-release:\1:'`
+      DISTRO=`echo /etc/*release | head -1 | sed 's:/etc/\(.*\)-release:\1:'`
     fi
 
     # Detect distro
-    case $RELEASE in
+    case $DISTRO in
       ubuntu)
-        export DISTRO='ubuntu'
+        echo 'ubuntu'
         ;;
 
       gentoo)
-        export DISTRO='gentoo'
+        echo 'gentoo'
         ;;
 
       *)
-        echo 'Unknown distro' $RELEASE
+        echo 'Unknown distro' $DISTRO
         exit 2
         ;;
     esac
     ;;
 
   *)
-    echo 'Unknown platform' $UNAME
+    echo 'Unknown platform' $PLATFORM
     exit 1
     ;;
 esac
