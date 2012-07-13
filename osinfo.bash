@@ -1,21 +1,24 @@
 #!/usr/bin/env bash
 
 # Gather uname
-UNAME=$(uname)
+PLATFORM=$(uname | tr '[:upper:]' '[:lower:]')
 
 # Detect platform
-case $UNAME in
-  Darwin)        # OS X
-    export PLATFORM='osx'
+case $PLATFORM in
+
+  # OS X
+  darwin)
+    echo 'osx'
   ;;
 
-  Linux)         # Linux
-    export PLATFORM='linux'
+  # Linux
+  linux)
+    echo 'linux'
 
     # Gather release info
     if [[ -n `command -v lsb_release` ]]; then
       # dump release info and drop version
-      RELEASE=`lsb_release -ds 2>/dev/null | sed 's/^\(.*\) .*/\L\1/'`
+      RELEASE=`lsb_release -ds 2>/dev/null | sed 's:^\(.*\) .*:\L\1:'`
     else
       # grab first entry and remove extraneous path and filename affixes
       RELEASE=`echo /etc/*release | head -1 | sed 's:/etc/\(.*\)-release:\1:'`
@@ -43,5 +46,3 @@ case $UNAME in
     exit 1
     ;;
 esac
-
-echo $PLATFORM $DISTRO | sed 's/ /\n/'
