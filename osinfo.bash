@@ -4,12 +4,12 @@
 PLATFORM=$(uname | tr '[:upper:]' '[:lower:]')
 echo $PLATFORM
 
-# Detect platform
+# Detect distro
 case $PLATFORM in
 
   # OS X
   darwin)
-    echo 'osx'
+    DISTRO='osx'
   ;;
 
   # Linux
@@ -24,11 +24,10 @@ case $PLATFORM in
     else
       DISTRO='unknown'
     fi
-
-    echo $DISTRO
   ;;
 
   *)
-    echo 'unknown'
+    DISTRO='unknown'
   ;;
 esac
+echo $DISTRO
