@@ -5,6 +5,7 @@ PLATFORM=$(uname | tr '[:upper:]' '[:lower:]')
 echo $PLATFORM
 
 # Detect distro
+DISTRO='unknown'
 case $PLATFORM in
 
   # OS X
@@ -21,13 +22,8 @@ case $PLATFORM in
     elif [[ -n `echo /etc/*release` ]]; then
       # grab first entry and remove extraneous path and filename affixes
       DISTRO=`echo /etc/*release | head -1 | sed 's:/etc/\(.*\)-release:\1:'`
-    else
-      DISTRO='unknown'
     fi
   ;;
 
-  *)
-    DISTRO='unknown'
-  ;;
 esac
 echo $DISTRO
