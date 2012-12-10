@@ -23,7 +23,7 @@ $ distro=$(osinfo.bash | tail -1)
 Possible future enhancements
 ----------------------------
 
-If you think any of these are particularly use, let me know, or even better send me code.
+If you think any of these are particularly useful, let me know, or even better send me code.
 
 * Detect PureDarwin/OpenDarwin
 * Detect OSX version (eg Lion, Leopard, Mountain Lion)
