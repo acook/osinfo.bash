@@ -2,6 +2,7 @@
 
 # used in conditionals to determine presence of a command or executable
 command_exists() { command -v "$1" > /dev/null 2>&1; }
+version_gte() { [[ $1 = $( echo -e "$1\n$2" | sort -V | tail -1) ]]; }
 
 # Gather uname and make it lowercase
 PLATFORM="$(uname | tr '[:upper:]' '[:lower:]')"
@@ -11,9 +12,25 @@ echo "$PLATFORM"
 DISTRO="unknown"
 case $PLATFORM in
 
-  # OS X
+  # macOS
   darwin)
-    DISTRO="osx"
+    if command_exists sw_vers; then
+      VERSION="$(sw_vers | grep ProductVersion | cut -d ':' -f2)"
+
+      OSX="10.8"
+      MACOS="10.12"
+
+      if version_gte "$VERSION" "$MACOS"; then
+        # current branding since 2016
+        DISTRO="macos"
+      elif version_gte "$VERSION" "$OSX"; then
+        # old branding between 2012-2016
+        DISTRO="osx"
+      else
+        # original branding between 2001-2012
+        DISTRO="macosx"
+      fi
+    fi
   ;;
 
   # Linux
