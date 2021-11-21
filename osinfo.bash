@@ -30,5 +30,7 @@ case $PLATFORM in
 esac
 
 DISTRO="$(echo "$DISTRO" | tr '[:upper:]' '[:lower:]')"
+DISTRO="${DISTRO%\"}"
+DISTRO="${DISTRO#\"}"
 
 echo $DISTRO
