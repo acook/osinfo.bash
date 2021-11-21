@@ -19,7 +19,7 @@ case $PLATFORM in
     if [[ -n `command -v lsb_release` ]]; then
       # Some distros have an lsb_release command that we can use
       # dump release info and drop version
-      DISTRO=`lsb_release -ds 2>/dev/null | sed 's:^\(.*?\) .*:\L\1:'`
+      DISTRO=`lsb_release -ds 2>/dev/null | sed 's:^\([[:alnum:]]*\) .*:\L\1:'`
     elif [[ -n `echo /etc/*release` ]]; then
       # Ohers have a file in /etc with the name of the distro in the filename
       # grab first entry and remove extraneous path and filename affixes
