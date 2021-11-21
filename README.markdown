@@ -3,10 +3,12 @@ OSinfo.bash
 
 Dumps the platform and distro.
 
-    Anthony M. Cook (2012)
+    Anthony M. Cook (2012-2021)
 
 Usage
 -----
+
+I use this in my startup scripts to determine which configuration blocks should run on Linux or Mac systems.
 
 Designed to be unixy, use filters with this to get the information you want.
 
