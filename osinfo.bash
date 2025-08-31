@@ -54,3 +54,7 @@ DISTRO="${DISTRO%\"}"
 DISTRO="${DISTRO#\"}"
 
 echo "$DISTRO"
+
+export PLATFORM
+export DISTRO
+export VERSION
